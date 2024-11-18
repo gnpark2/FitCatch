@@ -125,14 +125,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'LikedDetailPage',
           path: '/likedDetailPage',
-          builder: (context, params) => LikedDetailPageWidget(
-            coordinationDetail: params.getParam(
-              'coordinationDetail',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['coordination'],
-            ),
-          ),
+          builder: (context, params) => LikedDetailPageWidget(),
         ),
         FFRoute(
           name: 'authPage',

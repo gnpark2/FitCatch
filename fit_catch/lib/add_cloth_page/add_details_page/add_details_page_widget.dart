@@ -108,7 +108,8 @@ class _AddDetailsPageWidgetState extends State<AddDetailsPageWidget> {
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
-                          child: Column(
+                          child: SingleChildScrollView(
+                            child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
@@ -390,9 +391,7 @@ class _AddDetailsPageWidgetState extends State<AddDetailsPageWidget> {
                                           category: _model.choiceChipsValue1,
                                           style: _model.choiceChipsValue2,
                                         ));
-                                        if (Navigator.of(context).canPop()) {
-                                          context.pop();
-                                        }
+
                                         context.pushNamed(
                                           'CategoryPage',
                                           queryParameters: {
@@ -431,6 +430,7 @@ class _AddDetailsPageWidgetState extends State<AddDetailsPageWidget> {
                                 ),
                               ),
                             ],
+                          ),
                           ),
                         ),
                       ),
