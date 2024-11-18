@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "445083312906",
+    "project_id": "fitcatch-2a15e",
+    "storage_bucket": "fitcatch-2a15e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445083312906:android:8f340fcc0cc4f87db950f3",
+        "android_client_info": {
+          "package_name": "com.mycompany.fitcatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd5xU1j1-CvwYXSAe_ggOCuF56--G8aB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
