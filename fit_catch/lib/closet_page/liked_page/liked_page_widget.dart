@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'liked_page_model.dart';
 export 'liked_page_model.dart';
 
+
 class LikedPageWidget extends StatefulWidget {
   const LikedPageWidget({super.key});
 
@@ -19,8 +20,6 @@ class LikedPageWidget extends StatefulWidget {
 
 class _LikedPageWidgetState extends State<LikedPageWidget> {
   late LikedPageModel _model;
-  bool isCoordinationSaved = false;
-  DocumentReference? savedCoordinationRef;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,39 +32,16 @@ class _LikedPageWidgetState extends State<LikedPageWidget> {
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
-  Future<void> toggleSaveCoordination(CoordinationRecord coordination) async {
-    if (isCoordinationSaved) {
-      // 코디 삭제
-      if (savedCoordinationRef != null) {
-        await savedCoordinationRef!.delete();
-      }
-    } else {
-      // 코디 저장
-      final coordinationRecordData = createCoordinationRecordData(
-        user: currentUserReference,
-        top: coordination.top,
-        bottom: coordination.bottom,
-        outer: coordination.outer,
-        accessory: coordination.accessory,
-        createdTime: DateTime.now(),
-      );
-
-      savedCoordinationRef = await CoordinationRecord.collection.add(coordinationRecordData);
-    }
-
-    setState(() {
-      isCoordinationSaved = !isCoordinationSaved;
-    });
+  Future<void> deleteCoordination(CoordinationRecord coordination) async {
+    final coordinationRef = coordination.reference;
+    await coordinationRef.delete();
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          isCoordinationSaved ? '코디가 저장되었습니다!' : '코디가 삭제되었습니다!',
-        ),
+        content: Text('코디가 삭제되었습니다!'),
       ),
     );
   }
@@ -307,12 +283,12 @@ class _LikedPageWidgetState extends State<LikedPageWidget> {
                                                     alignment: AlignmentDirectional(1.0, -1.0),
                                                     child: IconButton(
                                                       icon: Icon(
-                                                        isCoordinationSaved ? Icons.favorite : Icons.favorite_border,
+                                                        Icons.favorite,
                                                         color: Colors.red,
                                                         size: 30.0,
                                                       ),
                                                       onPressed: () async {
-                                                        await toggleSaveCoordination(staggeredViewCoordinationRecord);
+                                                        await deleteCoordination(staggeredViewCoordinationRecord);
                                                       },
                                                     ),
                                                   ),

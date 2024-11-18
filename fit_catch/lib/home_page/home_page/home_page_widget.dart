@@ -992,6 +992,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   bool isCoordinationSaved = false;
   Map<String, DocumentReference?>? todayCoordination;
   DocumentReference? savedCoordinationRef;
+  List<String?>recommandStyle = [];
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -1021,6 +1022,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         };
       });
       await _checkIfCoordinationSaved();
+      await _updateRecommandStyle();
     }
   }
 
@@ -1092,6 +1094,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     );
   }
 
+  Future<void> _updateRecommandStyle() async {
+    if (todayCoordination == null) return;
+
+    List<String?> styles = [];
+    for (var category in todayCoordination!.keys) {
+      var reference = todayCoordination![category];
+      if (reference != null) {
+        var cloth = await reference.get();
+        if (styles.every((style) => style != cloth.get("style"))) {
+          styles.add(cloth.get("style"));
+        }
+      }
+    }
+
+    setState(() {
+      recommandStyle = styles;
+    });
+  }
+
   Map<String, DocumentReference?> getRandomCoordination(List<ClothRecord> clothes) {
     final groupedClothes = groupBy(clothes, (ClothRecord cloth) => cloth.style);
     List<ClothRecord?> coordination = [null, null, null, null];
@@ -1116,12 +1137,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       }
     }
 
-    return {
+    var selectedCoordination = {
       'top': coordination[0]?.reference,
       'bottom': coordination[1]?.reference,
       'outer': coordination[2]?.reference,
       'accessory': coordination[3]?.reference,
     };
+
+    _updateRecommandStyleWithClothes(coordination);
+
+    return selectedCoordination;
+  }
+
+  void _updateRecommandStyleWithClothes(List<ClothRecord?> coordination) {
+    setState(() {
+      recommandStyle = coordination.where((cloth) => cloth != null).map((cloth) => cloth!.style).toList();
+    });
   }
 
   @override
@@ -1417,22 +1448,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    '#스트릿룩',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color:
-                                                              Color(0xFF0F2C59),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                  ),
-                                                ],
+                                                children: recommandStyle.map<Widget>((style) {
+                                                  return Padding(
+                                                    padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
+                                                    child: Text(
+                                                      '#$style',
+                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                            fontFamily: 'Inter',
+                                                            color: Color(0xFF0F2C59),
+                                                            letterSpacing: 0.0,
+                                                            fontWeight: FontWeight.w600,
+                                                          ),
+                                                    ),
+                                                  );
+                                                }).toList(),
                                               ),
                                             ),
                                           ],
