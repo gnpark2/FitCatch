@@ -103,11 +103,14 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                                   onChanged: (val) async {
                                     safeSetState(
                                         () => _model.dropDownValue = val);
+                                    if (Navigator.of(context).canPop()) {
+                                      context.pop();
+                                    }
                                     context.pushNamed(
                                       'CategoryPage',
                                       queryParameters: {
                                         'categoryParam': serializeParam(
-                                          widget!.categoryParam,
+                                          _model.dropDownValue,
                                           ParamType.String,
                                         ),
                                       }.withoutNulls,
