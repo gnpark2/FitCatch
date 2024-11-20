@@ -365,6 +365,7 @@ class _LikedPageWidgetState extends State<LikedPageWidget> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        duration: Duration(microseconds: 500),
         content: Text('코디가 삭제되었습니다!'),
       ),
     );

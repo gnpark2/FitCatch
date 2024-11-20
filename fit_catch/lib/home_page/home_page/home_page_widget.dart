@@ -795,6 +795,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        duration: const Duration(milliseconds: 500),
         content: Text(
           isCoordinationSaved ? '코디가 저장되었습니다!' : '코디가 삭제되었습니다!',
         ),
