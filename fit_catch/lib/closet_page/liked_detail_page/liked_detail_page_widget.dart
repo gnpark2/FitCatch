@@ -239,6 +239,7 @@ class _LikedDetailPageWidgetState extends State<LikedDetailPageWidget> {
                           mainAxisSpacing: 4.0,
                           crossAxisSpacing: 4.0,
                           shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
                           itemCount: [
                             widget.coordinationRecord.top,
                             widget.coordinationRecord.bottom,

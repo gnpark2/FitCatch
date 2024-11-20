@@ -52,7 +52,9 @@ class _ClothDetailPageWidgetState extends State<ClothDetailPageWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
-          child: Column(
+          bottom: true,
+          child: SingleChildScrollView(
+            child:Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               StreamBuilder<ClothRecord>(
@@ -121,295 +123,256 @@ class _ClothDetailPageWidgetState extends State<ClothDetailPageWidget> {
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 32.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        stackClothRecord.name,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              fontSize: 24.0,
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      FlutterFlowIconButton(
-                                        borderRadius: 8.0,
-                                        buttonSize: 50.0,
-                                        icon: Icon(
-                                          Icons.delete_outline,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 30.0,
-                                        ),
-                                        onPressed: () async {
-                                          await widget!.clothDetail!.delete();
-
-                                          context.pushNamed(
-                                            'CategoryPage',
-                                            queryParameters: {
-                                              'categoryParam': serializeParam(
-                                                stackClothRecord.category,
-                                                ParamType.String,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 32.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          stackClothRecord.name,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                fontSize: 24.0,
+                                                letterSpacing: 0.0,
                                               ),
-                                            }.withoutNulls,
-                                          );
-                                        },
-                                      ),
-                                    ],
+                                        ),
+                                        FlutterFlowIconButton(
+                                          borderRadius: 8.0,
+                                          buttonSize: 50.0,
+                                          icon: Icon(
+                                            Icons.delete_outline,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 30.0,
+                                          ),
+                                          onPressed: () async {
+                                            await widget!.clothDetail!.delete();
+
+                                            context.pushNamed(
+                                              'CategoryPage',
+                                              queryParameters: {
+                                                'categoryParam': serializeParam(
+                                                  stackClothRecord.category,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 20.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        '카테고리',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              fontSize: 20.0,
-                                              letterSpacing: 0.0,
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 20.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          '카테고리',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                fontSize: 20.0,
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 8.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: FlutterFlowChoiceChips(
+                                            options: CategoryValues.values
+                                                .map((e) => e.name)
+                                                .toList()
+                                                .map((label) => ChipData(label))
+                                                .toList(),
+                                            onChanged: (true == true)
+                                                ? null
+                                                : (val) => safeSetState(() =>
+                                                    _model.choiceChipsValue1 =
+                                                        val?.firstOrNull),
+                                            selectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .info,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              iconColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              iconSize: 16.0,
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
                                             ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 8.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: FlutterFlowChoiceChips(
-                                          options: CategoryValues.values
-                                              .map((e) => e.name)
-                                              .toList()
-                                              .map((label) => ChipData(label))
-                                              .toList(),
-                                          onChanged: (true == true)
-                                              ? null
-                                              : (val) => safeSetState(() =>
-                                                  _model.choiceChipsValue1 =
-                                                      val?.firstOrNull),
-                                          selectedChipStyle: ChipStyle(
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Inter',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .info,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                            iconColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .info,
-                                            iconSize: 16.0,
-                                            elevation: 0.0,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          unselectedChipStyle: ChipStyle(
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Inter',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                            iconColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryText,
-                                            iconSize: 16.0,
-                                            elevation: 0.0,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          chipSpacing: 8.0,
-                                          rowSpacing: 8.0,
-                                          multiselect: false,
-                                          initialized:
-                                              _model.choiceChipsValue1 != null,
-                                          alignment: WrapAlignment.start,
-                                          controller: _model
-                                                  .choiceChipsValueController1 ??=
-                                              FormFieldController<List<String>>(
-                                            [stackClothRecord.category],
-                                          ),
-                                          wrapped: false,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 20.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        '스타일',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              fontSize: 20.0,
-                                              letterSpacing: 0.0,
+                                            unselectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              iconColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              iconSize: 16.0,
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
                                             ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 8.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: FlutterFlowChoiceChips(
-                                          options: StyleValues.values
-                                              .map((e) => e.name)
-                                              .toList()
-                                              .map((label) => ChipData(label))
-                                              .toList(),
-                                          onChanged: (true == true)
-                                              ? null
-                                              : (val) => safeSetState(() =>
-                                                  _model.choiceChipsValue2 =
-                                                      val?.firstOrNull),
-                                          selectedChipStyle: ChipStyle(
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Inter',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .info,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                            iconColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .info,
-                                            iconSize: 16.0,
-                                            elevation: 0.0,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
+                                            chipSpacing: 8.0,
+                                            rowSpacing: 8.0,
+                                            multiselect: false,
+                                            initialized:
+                                                _model.choiceChipsValue1 != null,
+                                            alignment: WrapAlignment.start,
+                                            controller: _model
+                                                    .choiceChipsValueController1 ??=
+                                                FormFieldController<List<String>>(
+                                              [stackClothRecord.category],
+                                            ),
+                                            wrapped: false,
                                           ),
-                                          unselectedChipStyle: ChipStyle(
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Inter',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                            iconColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryText,
-                                            iconSize: 16.0,
-                                            elevation: 0.0,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          chipSpacing: 8.0,
-                                          rowSpacing: 8.0,
-                                          multiselect: false,
-                                          initialized:
-                                              _model.choiceChipsValue2 != null,
-                                          alignment: WrapAlignment.start,
-                                          controller: _model
-                                                  .choiceChipsValueController2 ??=
-                                              FormFieldController<List<String>>(
-                                            [stackClothRecord.style],
-                                          ),
-                                          wrapped: false,
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 80.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
-                                        },
-                                        text: '옷장에 등록된 의류',
-                                        options: FFButtonOptions(
-                                          width: 350.0,
-                                          height: 45.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: Color(0xFF666666),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Inter Tight',
-                                                    color: Colors.white,
-                                                    fontSize: 20.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                          elevation: 0.0,
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 20.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          '스타일',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                fontSize: 20.0,
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 8.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: FlutterFlowChoiceChips(
+                                            options: StyleValues.values
+                                                .map((e) => e.name)
+                                                .toList()
+                                                .map((label) => ChipData(label))
+                                                .toList(),
+                                            onChanged: (true == true)
+                                                ? null
+                                                : (val) => safeSetState(() =>
+                                                    _model.choiceChipsValue2 =
+                                                        val?.firstOrNull),
+                                            selectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .info,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              iconColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              iconSize: 16.0,
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            unselectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              iconColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              iconSize: 16.0,
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            chipSpacing: 8.0,
+                                            rowSpacing: 8.0,
+                                            multiselect: false,
+                                            initialized:
+                                                _model.choiceChipsValue2 != null,
+                                            alignment: WrapAlignment.start,
+                                            controller: _model
+                                                    .choiceChipsValueController2 ??=
+                                                FormFieldController<List<String>>(
+                                              [stackClothRecord.style],
+                                            ),
+                                            wrapped: false,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -420,6 +383,7 @@ class _ClothDetailPageWidgetState extends State<ClothDetailPageWidget> {
               ),
             ],
           ),
+        ),
         ),
       ),
     );
