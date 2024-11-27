@@ -119,6 +119,7 @@ class _AddPageWidgetState extends State<AddPageWidget> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                     hintText: '카테고리 열람',
+                                    fixedText: '카테고리 열람',
                                     icon: Icon(
                                       Icons.dehaze_outlined,
                                       color: FlutterFlowTheme.of(context)
@@ -194,19 +195,11 @@ class _AddPageWidgetState extends State<AddPageWidget> {
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                          _model.uploadedFileUrl,
+                                        child: Image.asset(
+                                          'assets/images/defaultCloth.png',
                                           width: 400.0,
                                           height: 400.0,
                                           fit: BoxFit.cover,
-                                          errorBuilder:
-                                              (context, error, stackTrace) =>
-                                                  Image.asset(
-                                            'assets/images/error_image.png',
-                                            width: 400.0,
-                                            height: 400.0,
-                                            fit: BoxFit.cover,
-                                          ),
                                         ),
                                       ),
                                     ),

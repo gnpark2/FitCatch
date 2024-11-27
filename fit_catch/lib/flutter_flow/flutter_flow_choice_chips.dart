@@ -23,6 +23,10 @@ class ChipStyle {
     this.borderColor,
     this.borderWidth,
     this.borderRadius,
+    this.selectedDisabledTextStyle,
+    this.unselectedDisabledTextStyle,
+    this.selectedDisabledBackgroundColor,  // New parameter
+    this.unselectedDisabledBackgroundColor,  // New parameter
   });
   final Color? backgroundColor;
   final TextStyle? textStyle;
@@ -33,6 +37,10 @@ class ChipStyle {
   final Color? borderColor;
   final double? borderWidth;
   final BorderRadius? borderRadius;
+  final TextStyle? selectedDisabledTextStyle; // New parameter for selected disabled text style
+  final TextStyle? unselectedDisabledTextStyle; // New parameter for unselected disabled text style
+  final Color? selectedDisabledBackgroundColor;  // New parameter
+  final Color? unselectedDisabledBackgroundColor;  // New parameter
 }
 
 class FlutterFlowChoiceChips extends StatefulWidget {
@@ -100,12 +108,14 @@ class _FlutterFlowChoiceChipsState extends State<FlutterFlowChoiceChips> {
         final selected = selectedValues.contains(option.label);
         final style =
             selected ? widget.selectedChipStyle : widget.unselectedChipStyle;
+        final disabled = widget.onChanged == null; // Determine if the chip is disabled
         return Theme(
           data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
           child: ChoiceChip(
             selected: selected,
-            onSelected: widget.onChanged != null
-                ? (isSelected) {
+            onSelected: disabled
+                ? null
+                : (isSelected) {
                     choiceChipValues = List.from(selectedValues);
                     if (isSelected) {
                       widget.multiselect
@@ -121,11 +131,14 @@ class _FlutterFlowChoiceChipsState extends State<FlutterFlowChoiceChips> {
                       }
                     }
                     widget.onChanged!(choiceChipValues);
-                  }
-                : null,
+                  },
             label: Text(
               option.label,
-              style: style.textStyle,
+              style: disabled
+                  ? (selected
+                      ? style.selectedDisabledTextStyle
+                      : style.unselectedDisabledTextStyle)
+                  : style.textStyle,
             ),
             labelPadding: style.labelPadding,
             avatar: option.iconData != null
@@ -136,13 +149,20 @@ class _FlutterFlowChoiceChipsState extends State<FlutterFlowChoiceChips> {
                   )
                 : null,
             elevation: style.elevation,
-            disabledColor: widget.disabledColor,
-            selectedColor:
-                selected ? widget.selectedChipStyle.backgroundColor : null,
-            backgroundColor:
-                selected ? null : widget.unselectedChipStyle.backgroundColor,
+            disabledColor: disabled
+                ? (selected
+                    ? style.selectedDisabledBackgroundColor
+                    : style.unselectedDisabledBackgroundColor)
+                : widget.disabledColor,
+            selectedColor: selected
+                ? widget.selectedChipStyle.backgroundColor
+                : null,
+            backgroundColor: selected
+                ? null
+                : widget.unselectedChipStyle.backgroundColor,
             shape: RoundedRectangleBorder(
-              borderRadius: style.borderRadius ?? BorderRadius.circular(16),
+              borderRadius:
+                  style.borderRadius ?? BorderRadius.circular(16),
               side: BorderSide(
                 color: style.borderColor ?? Colors.transparent,
                 width: style.borderWidth ?? 0,

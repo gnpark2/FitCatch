@@ -37,6 +37,7 @@ class FlutterFlowDropDown<T> extends StatefulWidget {
     this.isMultiSelect = false,
     this.labelText,
     this.labelTextStyle,
+    this.fixedText, // Add this line
   }) : assert(
           isMultiSelect
               ? (controller == null &&
@@ -79,6 +80,7 @@ class FlutterFlowDropDown<T> extends StatefulWidget {
   final bool isMultiSelect;
   final String? labelText;
   final TextStyle? labelTextStyle;
+  final String? fixedText; // Add this line
 
   @override
   State<FlutterFlowDropDown<T>> createState() => _FlutterFlowDropDownState<T>();
@@ -206,9 +208,9 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
     );
   }
 
-  Text? _createHintText() => widget.hintText != null
-      ? Text(widget.hintText!, style: widget.textStyle)
-      : null;
+  Text? _createHintText() => widget.fixedText != null // Modify this line
+      ? Text(widget.fixedText!, style: widget.textStyle) // Modify this line
+      : (widget.hintText != null ? Text(widget.hintText!, style: widget.textStyle) : null); // Modify this line
 
   List<DropdownMenuItem<T>> _createMenuItems() => widget.options
       .map(
@@ -308,12 +310,13 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
             (item) => Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
-                  isMultiSelect
+                  widget.fixedText ?? // Modify this line
+                  (isMultiSelect
                       ? currentValues
                           .where((v) => optionLabels.containsKey(v))
                           .map((v) => optionLabels[v])
                           .join(', ')
-                      : optionLabels[item]!,
+                      : optionLabels[item]!),
                   style: widget.textStyle,
                   maxLines: 1,
                 )),

@@ -210,17 +210,14 @@ class _ClothDetailPageWidgetState extends State<ClothDetailPageWidget> {
                                                         val?.firstOrNull),
                                             selectedChipStyle: ChipStyle(
                                               backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
+                                                  Color(0xFF0F2C59),
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .info,
+                                                            Color(0xFFEAF2FF),
                                                         letterSpacing: 0.0,
                                                       ),
                                               iconColor:
@@ -229,21 +226,24 @@ class _ClothDetailPageWidgetState extends State<ClothDetailPageWidget> {
                                               iconSize: 16.0,
                                               elevation: 0.0,
                                               borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                                  BorderRadius.circular(16.0),
+                                                  selectedDisabledTextStyle: FlutterFlowTheme.of(context).bodyMedium.override( // Set selected disabled text style
+                                                  fontFamily: 'Inter',
+                                                  color: Color(0xFFEAF2FF),// Change this to your desired color
+                                                  letterSpacing: 0.0,
+                                                ),
+                                              selectedDisabledBackgroundColor: Color(0xFF0F2C59), // Change to your desired color
                                             ),
                                             unselectedChipStyle: ChipStyle(
                                               backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
+                                                  Color(0xFFEAF2FF),
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
+                                                            Color(0xFF0F2C59),
                                                         letterSpacing: 0.0,
                                                       ),
                                               iconColor:
@@ -252,7 +252,13 @@ class _ClothDetailPageWidgetState extends State<ClothDetailPageWidget> {
                                               iconSize: 16.0,
                                               elevation: 0.0,
                                               borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                                  BorderRadius.circular(16.0),
+                                                  unselectedDisabledTextStyle: FlutterFlowTheme.of(context).bodyMedium.override( // Set unselected disabled text style
+                                                fontFamily: 'Inter',
+                                                color: Color(0xFF0F2C59), // Change this to your desired color
+                                                letterSpacing: 0.0,
+                                              ),
+                                              unselectedDisabledBackgroundColor: Color(0xFFEAF2FF), // Change to your desired color
                                             ),
                                             chipSpacing: 8.0,
                                             rowSpacing: 8.0,
@@ -310,17 +316,14 @@ class _ClothDetailPageWidgetState extends State<ClothDetailPageWidget> {
                                                         val?.firstOrNull),
                                             selectedChipStyle: ChipStyle(
                                               backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
+                                                  Color(0xFF0F2C59),
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .info,
+                                                            Color(0xFFEAF2FF),
                                                         letterSpacing: 0.0,
                                                       ),
                                               iconColor:
@@ -329,21 +332,24 @@ class _ClothDetailPageWidgetState extends State<ClothDetailPageWidget> {
                                               iconSize: 16.0,
                                               elevation: 0.0,
                                               borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                                  BorderRadius.circular(16.0),
+                                                  selectedDisabledTextStyle: FlutterFlowTheme.of(context).bodyMedium.override( // Set selected disabled text style
+                                                  fontFamily: 'Inter',
+                                                  color: Color(0xFFEAF2FF),// Change this to your desired color
+                                                  letterSpacing: 0.0,
+                                                ),
+                                                selectedDisabledBackgroundColor: Color(0xFF0F2C59), // Change to your desired color
                                             ),
                                             unselectedChipStyle: ChipStyle(
                                               backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
+                                                  Color(0xFFEAF2FF),
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
+                                                            Color(0xFF0F2C59),
                                                         letterSpacing: 0.0,
                                                       ),
                                               iconColor:
@@ -352,7 +358,13 @@ class _ClothDetailPageWidgetState extends State<ClothDetailPageWidget> {
                                               iconSize: 16.0,
                                               elevation: 0.0,
                                               borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                                  BorderRadius.circular(16.0),
+                                                  unselectedDisabledTextStyle: FlutterFlowTheme.of(context).bodyMedium.override( // Set unselected disabled text style
+                                                fontFamily: 'Inter',
+                                                color: Color(0xFF0F2C59), // Change this to your desired color
+                                                letterSpacing: 0.0,
+                                              ),
+                                              unselectedDisabledBackgroundColor: Color(0xFFEAF2FF), // Change to your desired color
                                             ),
                                             chipSpacing: 8.0,
                                             rowSpacing: 8.0,

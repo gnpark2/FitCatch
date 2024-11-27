@@ -1230,7 +1230,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       ],
                                                     ),
                                                     Padding(
-                                                      padding: EdgeInsetsDirectional.fromSTEB(12.0, 16.0, 12.0, 8.0),
+                                                      padding: EdgeInsetsDirectional.fromSTEB(8.0, 16.0, 8.0, 8.0),
                                                       child: Container(
                                                         decoration: BoxDecoration(
                                                           color: FlutterFlowTheme.of(context).secondaryBackground,
